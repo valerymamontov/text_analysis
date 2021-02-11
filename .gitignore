@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyCharm files and folders
+.idea
+
+# data files
+files_result/
+files/sentiment-2.csv
