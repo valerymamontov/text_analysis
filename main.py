@@ -28,35 +28,28 @@ with open("files/sentiment-2.csv", encoding="cp1251") as file:
 
             # task 1 (positive smile + negative word or negative smile + positive word)
             if n2 > 0 and p1 > 0:
-                task1.write(f'{line}"|"'
-                            f'{" ".join(smile_dict["negative"])}"|"{",".join(tone_dict["positive"])}\n')
+                task1.write(f'{line}"|"{" ".join(smile_dict["negative"])}"|"{",".join(tone_dict["positive"])}\n')
             if p2 > 0 and n1 > 0:
-                task1.write(f'{line}"|"'
-                            f'{" ".join(smile_dict["positive"])}"|"{",".join(tone_dict["negative"])}\n')
+                task1.write(f'{line}"|"{" ".join(smile_dict["positive"])}"|"{",".join(tone_dict["negative"])}\n')
 
             # task 2 (negative + positive words)
             if n1 > 0 and p1 > 0:
-                task2.write(f'{line}"|"'
-                            f'{",".join(tone_dict["positive"])}"|"{",".join(tone_dict["negative"])}\n')
+                task2.write(f'{line}"|"{",".join(tone_dict["positive"])}"|"{",".join(tone_dict["negative"])}\n')
 
             # task 3 ("не" + "ни" + any smile)
             text_set = set(text.lower().split(" "))
             if "не" in text_set and (n2 > 0 and p2 > 0):
-                task3.write(f'{line}"|"не'
-                            f'{",".join(tone_dict["positive"] + tone_dict["negative"])}\n')
+                task3.write(f'{line}"|"не{",".join(tone_dict["positive"] + tone_dict["negative"])}\n')
             if "ни" in text_set and (n2 > 0 and p2 > 0):
-                task3.write(f'{line}"|"ни'
-                            f'{",".join(tone_dict["positive"] + tone_dict["negative"])}\n')
+                task3.write(f'{line}"|"ни{",".join(tone_dict["positive"] + tone_dict["negative"])}\n')
 
             # task 4 (any smile without negative or positive words)
             if (n1 == 0 and p1 == 0) and (n2 > 0 and p2 > 0):
-                task4.write(f'{line}"|"'
-                            f'{" ".join(smile_dict["positive"] + smile_dict["negative"])}\n')
+                task4.write(f'{line}"|"{" ".join(smile_dict["positive"] + smile_dict["negative"])}\n')
 
             # task 5 (two different smiles)
             if n2 > 0 and p2 > 0:
-                task5.write(f'{line}"|"'
-                            f'{" ".join(smile_dict["positive"])}"|"{" ".join(smile_dict["negative"])}\n')
+                task5.write(f'{line}"|"{" ".join(smile_dict["positive"])}"|"{" ".join(smile_dict["negative"])}\n')
         else:
             empty_rows += 1
 
