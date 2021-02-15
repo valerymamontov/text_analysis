@@ -35,8 +35,8 @@ def find_polarity(text: str, negative, positive: set(), set_type: str) -> dict()
     assert set_type in ["words", "smiles"], "Допустимы два значения set_type: words или smiles"
 
     if set_type == "words":
-        neg1w = [neg for neg in negative if neg.count(" ") == 0] # набор из одного слова
-        neg2w = [neg for neg in negative if neg.count(" ") > 0] # набор из двух и более слов
+        neg1w = [neg for neg in negative if neg.count(" ") == 0]  # набор из одного слова
+        neg2w = [neg for neg in negative if neg.count(" ") > 0]  # набор из двух и более слов
         # pos1 = list(filter(lambda x: x.count(" ") == 0), positive)
         pos1w = [pos for pos in positive if pos.count(" ") == 0]
         pos2w = [pos for pos in positive if pos.count(" ") > 0]

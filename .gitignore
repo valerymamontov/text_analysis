@@ -134,3 +134,4 @@ dmypy.json
 # data files
 files_result/
 files/sentiment-2.csv
+files/sentiment.csv
