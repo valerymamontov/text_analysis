@@ -13,7 +13,6 @@ def save_row(n1: int, p1: int, n2: int, p2: int, smile_dict: Dict[str, str], lin
     :param p2: int
     :param smile_dict: Dict[str, str]
     :param line: str
-    :param file4: TextIO
     :return: None
     """
 

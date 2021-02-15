@@ -11,7 +11,6 @@ def save_row(n2: int, p2: int, smile_dict: Dict[str, str], line: str) -> None:
     :param p2: int
     :param smile_dict: Dict[str, str]
     :param line: str
-    :param file5: TextIO
     :return: None
     """
     # two different smiles

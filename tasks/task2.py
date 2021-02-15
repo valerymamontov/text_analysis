@@ -11,7 +11,6 @@ def save_row(n1: int, p1: int, tone_dict: Dict[str, str], line: str) -> None:
     :param p1: int
     :param tone_dict: Dict[str, str]
     :param line: str
-    :param file2: TextIO
     :return: None
     """
     # negative words + positive words

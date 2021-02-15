@@ -51,7 +51,10 @@ with open("files/sentiment.csv", mode="r", encoding="utf-8") as file:
                 task5.save_row(n2, p2, smile_dict, line)
 
             else:
+                with open("files_result/!empty_rows.csv", "a") as file6:
+                    file6.write(line)
                 empty_rows += 1
+
             i += 1
         except Exception as ex:
             print(ex)
