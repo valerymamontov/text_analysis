@@ -1,4 +1,4 @@
-from typing import TextIO, Dict
+from typing import Dict
 
 
 def save_row(n1: int, p1: int, n2: int, p2: int, tone_dict: Dict[str, str], smile_dict: Dict[str, str], line: str) -> None:
