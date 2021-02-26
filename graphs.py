@@ -4,44 +4,51 @@ import re
 # it's raw code:
 
 rus_alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-eng_alphabet = "abcdefghijklmnopqrstuvwxyz1234567890"
-s_symbols = ",.!?:)"
+eng_alphabet = "abcdefghijklmnopqrstuvwxyz1234567890_"
+s_symbols = ",.!?:)…"
 
+symbols = set()
 i = 0
+n = 0
+pairs = 0
 
 with open("files/sentiment-10000.csv", encoding="utf-8") as file:
     for line in file:
-        if i < 1000000:
+        if i < 10000:
             user_name = line.split('"|"')[2]
             text = line.split('"|"')[3]
             users_in_text = re.findall('@[^\s]+', text)
+            users = set()
 
             if len(users_in_text) > 0:
                 for user in users_in_text:
                     is_s_symbols = any(s in s_symbols for s in list(user))
                     if is_s_symbols:
-                        user = user.split(",")[0]
-                        user = user.split(".")[0]
-                        user = user.split("!")[0]
-                        user = user.split("?")[0]
-                        user = user.split(":")[0]
-                        user = user.split(")")[0]
-                    TODO: "change code using regex"
+                        user = re.sub("[,.!?):…\>]+", "", user)
 
                     is_russian = any(s in rus_alphabet for s in list(user))
                     if is_russian:
-                        u = "".join([x for x in list(user) if x.lower() not in rus_alphabet])
+                        user = "".join([x for x in list(user) if x.lower() not in rus_alphabet])
 
                     last_symbol = user[-1:]
                     if last_symbol.lower() not in eng_alphabet:
-                        if last_symbol == "…":
-                            print(line)
+                        symbols.add(last_symbol)
+                        n += 1
+                        print(line)
 
-                        # print(line)
-                        # print(user_name, user)
+                    user = user.replace("@", "")
+                    if len(user) > 1:
+                        users.add(user)
+
+            users.discard(user_name)
+
+            if len(users) > 0:
+                with open("files_result/users.csv", "a") as f:
+                    for user in users:
+                        pairs += 1
+                        f.write(f"{user_name}|{user}\n")
             i += 1
 
-# абвгдеёжзийклмнопрстуфхцчшщъыьэюя
 
 #  @Faka_Princess: @__Green_Idiot__
 
@@ -54,4 +61,6 @@ with open("files/sentiment-10000.csv", encoding="utf-8") as file:
 
 # {'_', '4', ')', '…', '7', 'ь', ',', 'я', '5', 'к', '?', '2', '9', '.', '8', '0', '1', 'у', ':', '6', '3', '!'}
 # {'…', '_', ')', ',', '!', 'у', '.', ':', 'ь', 'к', '?', 'я'}
-print(symbols)
+print("symbols: ", symbols)
+print("count last symbols: ", n)
+print("pairs: ", pairs)
